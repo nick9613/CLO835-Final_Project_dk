@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: e-webapp
-  labels: 
+  name: webapp
+  labels:
     app: employees
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: employees
@@ -14,42 +14,49 @@ spec:
       labels:
         app: employees
     spec:
-      serviceAccountName: clo835
+      serviceAccountName: clo835-group11  # Assign the created ServiceAccount
       containers:
-        - name: e-webapp
-          image: 360201675659.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp:v2.0
-          ports: 
+        - name: webapp
+          image: 139675527364.dkr.ecr.us-east-1.amazonaws.com/group11-repo:appv1.0
+          ports:
             - containerPort: 81
-              protocol: TCP
           env:
             - name: DBHOST
               valueFrom:
                 configMapKeyRef:
-                  name: webapp-config
+                  name: webapp
                   key: DBHOST
             - name: DBPORT
               valueFrom:
                 configMapKeyRef:
-                  name: webapp-config
+                  name: webapp
                   key: DBPORT
             - name: DBUSER
-              value: root
-            - name: DBPWD 
-              value: db123
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp
+                  key: DBUSER      
+            
+              
+            - name: DBPWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: mysql-root-password
+            - name: DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: mysql-database
+            
+              
             - name: GROUP_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: webapp-config
+                  name: webapp
                   key: GROUP_NAME
-            - name: image
+            - name: IMAGE_URL
               valueFrom:
                 configMapKeyRef:
-                  name: webapp-config
-                  key: image
-            - name: IMAGE_S3
-              valueFrom:
-                configMapKeyRef:
-                  name: webapp-config
-                  key: IMAGE_S3
-            
-            
+                  name: webapp
+                  key: IMAGE_URL
