@@ -81,6 +81,7 @@ else:
 
 # Define a variable for the image path
 BACKGROUND_IMAGE_PATH = "/static/downloads/sample.jpg"  
+print(BACKGROUND_IMAGE_PATH)
 
 
 @app.route("/", methods=['GET', 'POST'])
