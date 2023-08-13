@@ -1,4 +1,4 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: webapp-hpa
@@ -7,12 +7,6 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: webapp
-  minReplicas: 2
+  minReplicas: 3
   maxReplicas: 3  # Adjust this as needed
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 5  # Adjust this to a low value for quick testing
+  targetCPUUtilizationPercentage: 5 # Adjust this to a low value for quick testing
