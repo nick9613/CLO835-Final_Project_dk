@@ -7,5 +7,6 @@ data:
   DBPORT: "3306"
   GROUP_NAME: "GROUP11"
   DBUSER: "root"
-  IMAGE_URL: "https://group11-finalproject-s3.s3.amazonaws.com/sample.jpg"
+  #IMAGE_URL: "https://group11-finalproject-s3.s3.amazonaws.com/sample.jpg"
+  IMAGE_URL: "https://group11-finalproject-s3.s3.amazonaws.com/sample1.jpg"
  
