@@ -3,6 +3,7 @@
 
 # Create EKS Cluster
 ```sh
+git clone https://github.com/dkhan0103/CLO835-Final_Project.git
 cd CLO835-Final_Project/manifest
 
 # Install eksctl
